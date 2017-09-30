@@ -1,0 +1,12 @@
+<div class="col-md-8">
+	<h3>Chi tiết Khách hàng bị từ chối cho vay</h3>
+	<% if @denied_customer.present? %>
+	  <p>Họ tên: <%= @denied_customer.name %></p>
+	  <p>Số CMND: <%= @denied_customer.id_no %></p>
+	  <p>CIF (nếu có): <%= @denied_customer.cif %></p>
+	  <p>Số tiền vay: <%= number_to_currency(@denied_customer.amount, unit: "VND", separator: ",", delimiter: ".", format: "%n %u", precision: 0) %></p>
+	  <p>Mục đích vay: <%= @denied_customer.purpose %></p>
+	  <p>Lý do từ chối cho vay: <%= @denied_customer.explaination %></p>
+	  <p>Cán bộ nhập: <%= @denied_customer.user.name %></p>
+	<% end %>
+</div>

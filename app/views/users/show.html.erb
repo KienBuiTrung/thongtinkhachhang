@@ -1,0 +1,43 @@
+<div class="col-md-8">
+    <h3>Tổng số KH đã nhập: <%= @denied_customers.count %></h3>
+    <% if @user.denied_customers.any? %>
+      <h3>Danh sách khách hàng đã nhập </h3>
+ 		<table class="table table-bordered table-hover">
+		<thead>
+		   <tr>
+				<th>STT</th>
+				<th>Họ tên</th>
+				<th>Số CMND</th>
+				<th>CIF (nếu có)</th>
+				<th>Số tiền muốn vay</th>
+				<th>Mục đích vay</th>
+				<th>Lý do từ chối</th>
+				<th>Sửa thông tin</th>
+	   		    <th>Xóa</th>
+			</tr>
+		</thead>
+		   <tbody>
+		   <% @denied_customers.each_with_index do |dc, index| %>
+		   <tr>
+			   <th scope="row"><%= index + 1 %></th>
+			   	<td><%= dc.name %></td>
+			   	<td><%= dc.id_no %></td>
+			   	<td><%= dc.cif %></td>
+			   	<td><%= number_to_currency(dc.amount, unit: "VND", separator: ",", delimiter: ".", format: "%n %u", precision: 0) %></td>
+			   	<td><%= dc.purpose %></td>
+			   	<td><%= dc.explaination %></td>
+			    <td><%= link_to "Sửa", edit_denied_customer_path(dc) %>
+			   	
+			    <td><%= link_to "Xóa", dc, method: :delete,
+			                                  data: { confirm: "Bạn có chắc chắn muốn xóa?" } %>
+			    </td>                       
+
+		   </tr>
+		   <% end %>
+		   	
+		   </tbody>
+			
+		</table>
+
+    <% end %>
+  </div>

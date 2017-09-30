@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= yield(:title) %></title>
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag    'application', media: 'all',
+                                              'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <!--[if lt IE 9]>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/r29/html5.min.js">
+      </script>
+    <![endif]-->
+  </head>
+  <body>
+    <header class="navbar navbar-fixed-top navbar-inverse">
+      <div class="container">
+        <%= link_to image_tag("logo.png", width: "120px"), '#', id: "logo" %>
+
+        <nav>
+          <ul class="nav navbar-nav">
+          <li style="margin-top: 11px; font-size: 24px; color: white;">PHỦ QUỲ</li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            
+            <% if logged_in? %>
+            <li><%= link_to "Nhập Khách hàng", new_denied_customer_path %></li>
+            <li><%= link_to "Danh sách Khách hàng", denied_customers_path %></li>
+            <li><%= link_to "Danh sách Cán bộ", users_path %></li>
+	          <li class="dropdown">
+	            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+	              <%= current_user.name %> <b class="caret"></b>
+	            </a>
+	            <ul class="dropdown-menu">
+	              <li><%= link_to "Trang cá nhân", current_user %></li>
+	              <li><%= link_to "Cài đặt", edit_user_path(current_user) %></li>
+	              <li class="divider"></li>
+	              <li>
+	                <%= link_to "Đăng xuất", logout_path, method: :delete %>
+	              </li>
+	            </ul>
+	          </li>
+	        <% else %>
+	          <li><%= link_to "Danh sách Khách hàng", denied_customers_path %></li>
+            <li><%= link_to "Đăng nhập", login_path %></li>
+	        <% end %>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <div class="container">
+    	<% flash.each do |message_type, message| %>
+        	<div class="alert alert-<%= message_type %>"><%= message %></div>
+      	<% end %>
+      <%= yield %>
+    </div>
+  </body>
+</html>

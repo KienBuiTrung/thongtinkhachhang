@@ -1,0 +1,46 @@
+<div class="col-md-8">
+
+    <h3>Tổng số KH (toàn bộ CN) đã nhập: <%= @denied_customers.count %></h3>
+    <% if @denied_customers.any? %>
+      <h3>Danh sách khách hàng </h3>
+ 		<table class="table table-bordered table-hover">
+		<thead>
+		   <tr>
+				<th>STT</th>
+				<th>Họ tên</th>
+				<th>Số CMND</th>
+				<th>CIF (nếu có)</th>
+				<th>Số tiền muốn vay</th>
+				<th colspan="2">Mục đích vay</th>
+				<th colspan="4">Lý do từ chối</th>
+				<th>Cán bộ nhập</th>
+				<% if current_user %>
+					<th></th>
+				<% end %>
+
+			</tr>
+		</thead>
+		   <tbody>
+		   <% @denied_customers.each_with_index do |dc, index| %>
+		   <tr>
+			   <th scope="row"><%= index + 1 %></th>
+			   	<td><%= dc.name %></td>
+			   	<td><%= dc.id_no %></td>
+			   	<td><%= dc.cif %></td>
+			   	<td><%= number_to_currency(dc.amount, unit: "VND", separator: ",",
+			   	 delimiter: ".", format: "%n %u", precision: 0) %></td>
+			   	<td colspan="2"><%= dc.purpose %></td>
+			   	<td colspan="4"><%= dc.explaination %></td>
+			   	<td><%= dc.user.name %></td>
+		    	<% if current_user %>
+		    		<td><%= link_to "Xem chi tiết", denied_customer_path(dc) %></td>
+		    	<% end %>
+		   </tr>
+		   <% end %>
+		   	
+		   </tbody>
+			
+		</table>
+
+    <% end %>
+  </div>

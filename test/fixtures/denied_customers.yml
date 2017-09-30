@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  cif: 1
+  id_no: 1
+  amount: 
+  purpose: MyText
+  explaination: MyText
+  user: one
+
+two:
+  name: MyString
+  cif: 1
+  id_no: 1
+  amount: 
+  purpose: MyText
+  explaination: MyText
+  user: two
